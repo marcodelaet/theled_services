@@ -1,6 +1,6 @@
 <?php
 echo "<h1>Ambiente Docker PHP/Apache/MariaDB</h1>";
-
+/*
 // Teste de conexão com o MariaDB (substitua pelos seus dados)
 $servername = "mariadb"; // Nome do serviço no docker-compose.yml
 $username = "root";
@@ -14,7 +14,7 @@ try {
 } catch(PDOException $e) {
     echo "<p>Falha na conexão com MariaDB: " . $e->getMessage() . "</p>";
 }
-
+*/
 phpinfo();
 
 ?>
