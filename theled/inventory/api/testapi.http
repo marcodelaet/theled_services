@@ -1,0 +1,30 @@
+### UPLOAD CSV - POST
+POST http://localhost/theled/inventory/api/upload/upload.csvtodatabase.dao.php
+Content-Type: multipart/form-data; boundary=testing
+
+--testing
+Content-Disposition: form-data; name="platform"
+
+onsign
+--testing
+Content-Disposition: form-data; name="uploadType"
+
+screens
+--testing
+Content-Disposition: form-data; name="separator"
+
+;
+--testing
+Content-Disposition: form-data; name="upload-file"; filename="./public/teste.csv"
+Content-Type: text/csv
+
+#< C:/srv/arquivo.csv
+#< C:/srv/hivestack_screens_2025-12-09T16_39_03.883.csv
+#< C:/srv/hivestack_sites_2025-12-10T13_58_57.616.csv
+#< C:/srv/Adsmovil_ExportedDigitalBillboards1765297859445(Digital Billboard).csv
+#< C:/srv/admooh_Devices.csv
+#< C:/srv/admooh_Placements.csv
+< C:/srv/OnSign_RelatoriodePlayers.csv
+--testing--
+
+################################################

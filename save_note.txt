@@ -1,0 +1,79 @@
+Telas com número de plays com diferenças grandes nos últimos 3 dias:
+0005-HRF-T03-ACLIMAÇÃO - 
+10/11: 41 
+11/11: 132 
+12/11: 66
+13/11: contagens dentro da normalidade
+
+0009-HRF-AÇO-MOOCA TERESINA-AÇOUGUE 
+10/11: 400 
+11/11: 499 
+12/11: 265
+13/11: contagens dentro da normalidade
+
+0183-PDA-T03-REBOUÇAS
+10/11: 298 
+11/11: 303 
+12/11: 149
+13/11: contagens dentro da normalidade
+
+2132-MPA-T01-TONELEROS 
+10/11: 0 
+11/11: 359 
+12/11: 1
+13/11: contagens dentro da normalidade
+
+5056-MPA-T01-ARTUR PRADO 
+10/11: 254 
+11/11: 0 
+12/11: 84
+13/11: contagens dentro da normalidade
+
+5141-MPA-T01-ALEXANDRE DUMAS 
+10/11: 210 
+11/11: 108 
+12/11: 66
+13/11: contagens dentro da normalidade
+
+5141-MPA-T01-ALEXANDRE DUMAS
+data - Plays - Impressões
+10/11 - 210 - 3529
+11/11 - 108 - 1614
+12/11 - 0 - OFF
+13/11 - 7 - 137
+
+5056-MPA-T01-ARTUR PRADO
+data - Plays - Impressões
+10/11 - 254 - 1026
+11/11 - 0 - OFF
+12/11 - 84 - 535
+13/11 - 210 - 1048
+
+0700-MPA-T01-CARAMURU
+data - Plays - Impressões
+10/11 - 353 - 1633
+11/11 - 263 - 1096
+12/11 - 34 - 146
+13/11 - 209 - 706
+
+0374-MPA-T01-HORTIFRUTI JOÃO DIAS
+data - Plays - Impressões
+10/11 - 294 - 1300
+11/11 - 283 - 1331
+12/11 - 264 - 1253
+13/11 - 197 - 785
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
