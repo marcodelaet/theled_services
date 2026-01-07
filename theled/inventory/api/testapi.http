@@ -1,5 +1,5 @@
 ### UPLOAD CSV - POST
-POST http://localhost/theled/inventory/api/upload/upload.csvtodatabase.dao.php
+POST http://localhost/theled/inventory/api/inventory/upload/upload.csvtodatabase.dao.php
 Content-Type: multipart/form-data; boundary=testing
 
 --testing
@@ -26,5 +26,46 @@ Content-Type: text/csv
 #< C:/srv/admooh_Placements.csv
 < C:/srv/OnSign_RelatoriodePlayers.csv
 --testing--
+
+################################################
+
+### LIST INVENTORY - POST
+POST http://localhost/theled/inventory/api/inventory/list/list.platforminventory.dao.php
+Content-Type: multipart/form-data; boundary=testing
+
+--testing
+Content-Disposition: form-data; name="auth"
+
+7c4a8d09ca3762af61e59520943dc26494f8941b
+--testing
+Content-Disposition: form-data; name="secretkey"
+
+d93a5def7511da3d0f2d171d9c344e91-69c5fcebaa65b560eaf06c3fbeb481ae44b8d618
+--testing
+Content-Disposition: form-data; name="platform"
+
+hivestack
+--testing
+Content-Disposition: form-data; name="subjectType"
+
+screens
+--testing
+Content-Disposition: form-data; name="page"
+
+4
+--testing
+Content-Disposition: form-data; name="orderby"
+
+// OnSign
+//`Nome do Player`
+
+// Hivestack
+`screen ID` 
+
+--testing
+Content-Disposition: form-data; name="orderdirection"
+
+ASC
+--testing
 
 ################################################
