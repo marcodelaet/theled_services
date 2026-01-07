@@ -109,13 +109,13 @@ $error      = "";
 $html       = "";
 $dataToShow = [];
 
-$columns    = ""; // columns to return (depending of the choosed platform)
+$columns    = "*"; // columns to return (depending of the choosed platform)
 $where      = ""; // generating an where statement
 
 if(isset($_POST["platform"]))
     $platform   = $_POST["platform"];
-if(isset($_POST["uploadType"]))
-    $type       = $_POST["uploadType"];
+if(isset($_POST["subjectType"]))
+    $type       = $_POST["subjectType"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["auth"]) && (isset($_POST["secretkey"])))) {
     $auth       = str_replace("'","''",$_POST["auth"]); 
@@ -130,21 +130,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["auth"]) && (isset($_P
     // if enable, bring the lines
     if($rs_count[0]['total'] > 0){
         $query_return   = "SELECT $columns FROM ".$type."_".$platform." $where ";
-        $totalpages = ceil($DB->numrows($query_return) / $maxreturn);
+        $numRowsTotal = $DB->numrows($query_return);
+        $totalpages = ceil($numRowsTotal / $maxreturn);
 
         $page       = 1;
         if(isset($_POST["page"])){
-            $page       = $_POST['page'];
+            $page       = (int)$_POST['page'];
             if($page > $totalpages)
                 $page = $totalpages;
             if($page <= 0)
                 $page = 1;
         }
+
+        $orderby       = "";
+        if(isset($_POST["orderby"])){
+            $orderby       = "ORDER BY ".$_POST['orderby'];
+            if(isset($_POST["orderdirection"]))
+                $orderby       .= " ".$_POST['orderdirection'];
+        }
             
         $offset     = ($page * $maxreturn) - $maxreturn;
 
-        $query_return_limited=  $query_return . " LIMIT $offset, $maxreturn";
+        $query_return_limited=  $query_return . " $orderby LIMIT $offset, $maxreturn";
         $rs_data    = $DB->getData($query_return_limited);
+        $numRowsLimited = $DB->numrows($query_return_limited);
 
     } else { // if not authorized, return error
         $error      = "Permission denied!";
@@ -177,6 +186,11 @@ $returning = [
     'success' => $status,
     'message' => "$message",
     //'html' => "$html",
+    'page' => $page,
+    'totalpages' => $totalpages,
+    'numRowsTotal' => $numRowsTotal,
+    'numRowsPage' => $numRowsLimited,
+    'offset' => $offset,
     'data' => $data
     //'lines' => $lines
 ];
