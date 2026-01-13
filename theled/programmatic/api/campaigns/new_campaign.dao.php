@@ -1,9 +1,9 @@
 <?php
 //REQUIRE GLOBAL conf
-require_once('../../../database/.config');
+require_once('../../database/.config');
 
 // REQUIRE conexion class
-require_once('../../../database/connect.database.php');
+require_once('../../database/connect.database.php');
 
 function getConvertMonthBRInt($strMonth){
     $returning  = $strMonth;
@@ -102,23 +102,24 @@ $DB = new MySQLDB($DATABASE_HOST,$DATABASE_USER,$DATABASE_PASSWORD,$DATABASE_NAM
 // call conexion instance
 $con = $DB->connect();
 
-$maxreturn  = 200; // number total of lines to return
-$totalpages = 0;
-$page=0;
-$numRowsTotal=0;
-$numRowsLimited=0;
-$offset=0;
-
 $status     = true;
 $data       = false;
 $message    = null;
 
 $error      = "";
-$html       = "";
-$dataToShow = [];
 
-$columns    = "*"; // columns to return (depending of the choosed platform)
-$where      = ""; // generating an where statement
+$campaign_name = "";
+if(isset($_POST["campaign_name"])){
+    $campaign_name   = $_POST["campaign_name"];
+}
+
+$invian_id = "";
+if(isset($_POST["invian_id"])){
+    $invian_id   = $_POST["invian_id"];
+}
+
+$columns    = "UUID,campaign_name,invian_id,created_at,updated_at"; // columns to return (depending of the choosed platform)
+$values     = "UUID(),'$campaign_name','$invian_id',now(),now()";
 
 if(isset($_POST["platform"]))
     $platform   = $_POST["platform"];
@@ -137,35 +138,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST["auth"]) && (isset($_P
 
     // if enable, bring the lines
     if($rs_count[0]['total'] > 0){
-    if(isset($_POST["maxreturn"]))
-        $maxreturn   = $_POST["maxreturn"];
-
-        $query_return   = "SELECT $columns FROM ".$type."_".$platform." $where ";
-        $numRowsTotal = $DB->numrows($query_return);
-        $totalpages = ceil($numRowsTotal / $maxreturn);
-
-        $page       = 1;
-        if(isset($_POST["page"])){
-            $page       = (int)$_POST['page'];
-            if($page > $totalpages)
-                $page = $totalpages;
-            if($page <= 0)
-                $page = 1;
+        if(isset($_POST["fee"])){
+            $columns.= ",fee";
+            $fee    = $_POST["fee"];
+            $values = $fee;
         }
-
-        $orderby       = "";
-        if(isset($_POST["orderby"])){
-            $orderby       = "ORDER BY ".$_POST['orderby'];
-            if(isset($_POST["orderdirection"]))
-                $orderby       .= " ".$_POST['orderdirection'];
+        if(isset($_POST["start_date"])){
+            $columns .= ",start_date";
+            $start_date   = $_POST["start_date"];
+            $values = "'$start_date'";
+        }
+        if(isset($_POST["stop_date"])){
+            $columns .= ",stop_date";
+            $stop_date   = "'$stop_date'";
         }
             
-        $offset     = ($page * $maxreturn) - $maxreturn;
 
-        $query_return_limited=  $query_return . " $orderby LIMIT $offset, $maxreturn";
-        $rs_data    = $DB->getData($query_return_limited);
-        $numRowsLimited = $DB->numrows($query_return_limited);
-        $message    = 'Get Data successfully';
+        $query_insert   = "INSERT INTO campaigns ($columns) VALUES ($values)";
+        $exec_insertion   = $DB->executeInstruction($query_insert);
+
+        
+        $message    = 'Insert data successfully';
 
     } else { // if not authorized, return error
         $error      = "Permission denied!";
