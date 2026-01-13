@@ -1,9 +1,9 @@
 <?php
 //REQUIRE GLOBAL conf
-require_once('../../../database/.config');
+require_once('../../database/.config');
 
 // REQUIRE conexion class
-require_once('../../../database/connect.database.php');
+require_once('../../database/connect.database.php');
 
 function getConvertMonthBRInt($strMonth){
     $returning  = $strMonth;
